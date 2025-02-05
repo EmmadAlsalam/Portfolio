@@ -15,12 +15,13 @@ public class Program
             {
                 webBuilder.UseStartup<Startup>();
                 
-                // Lägg till stöd för Render-miljövariabel
-                webBuilder.UseEnvironment(
-                    Environment.GetEnvironmentVariable("RENDER_ASPNETCORE_ENVIRONMENT") ?? 
-                    Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? 
-                    "Production"
-                );
+                // Robust miljövariabelhantering
+                var environment = Environment.GetEnvironmentVariable("RENDER_ASPNETCORE_ENVIRONMENT") 
+                    ?? Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") 
+                    ?? "Production";
+                
+                webBuilder.UseEnvironment(environment);
+                Console.WriteLine($"Running in environment: {environment}");
             });
 }
 
