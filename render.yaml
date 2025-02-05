@@ -5,8 +5,8 @@ services:
     buildCommand: dotnet restore && dotnet publish -c Release -o ./publish
     startCommand: cd publish && dotnet Portfolio.dll
     envVars:
-      - key: ASPNETCORE_ENVIRONMENT
+      - key: RENDER_ASPNETCORE_ENVIRONMENT
         value: Production
-    plan: free # eller standard beroende på dina behov
-    branch: main # ändra till din huvudsakliga branch
+    plan: free
+    branch: main
     rootDir: .
