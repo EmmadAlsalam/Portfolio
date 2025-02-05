@@ -1,0 +1,25 @@
+# .NET Core
+bin/
+obj/
+*.suo
+*.user
+_ReSharper.*
+*.sln.docstates
+
+# Visual Studio
+.vs/
+*.swp
+*~
+.vscode/
+
+# Rider
+.idea/
+
+# Publish output
+publish/
+
+# Logs
+*.log
+
+# Environment variables
+.env

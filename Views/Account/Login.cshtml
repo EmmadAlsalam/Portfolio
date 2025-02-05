@@ -1,0 +1,57 @@
+@model Portfolio.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Logga in";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="auth-card">
+                <div class="card-body p-4">
+                    <h2 class="text-center mb-4">@ViewData["Title"]</h2>
+                    
+                    <form asp-controller="Account" asp-action="Login" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        
+                        <div class="form-floating mb-3">
+                            <input asp-for="Email" class="form-control auth-input" placeholder="namn@exempel.com" />
+                            <label asp-for="Email">E-postadress</label>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input asp-for="Password" class="form-control auth-input" placeholder="Lösenord" />
+                            <label asp-for="Password">Lösenord</label>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="mb-4 form-check">
+                            <input asp-for="RememberMe" class="form-check-input" />
+                            <label asp-for="RememberMe" class="form-check-label">Kom ihåg mig</label>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn auth-button">Logga in</button>
+                        </div>
+                        
+                        <div class="text-center mt-3">
+                            <p class="mb-0">Har du inget konto? <a asp-action="Register" class="text-decoration-none">Registrera dig här</a></p>
+                            <a href="#" class="text-decoration-none d-block mt-2">Glömt lösenord?</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function() {
+            // Auto-focus på email input
+            $('#Email').focus();
+        });
+    </script>
+}

@@ -1,0 +1,130 @@
+@model ContactViewModel
+
+@{
+    ViewData["Title"] = "Kontakt";
+}
+
+<!-- Contact Hero -->
+<section class="hero mb-5">
+    <div class="container">
+        <h1 class="display-4 fw-bold fade-in">Kontakta Mig</h1>
+        <p class="lead fade-in">Har du en fråga eller vill du samarbeta?</p>
+    </div>
+</section>
+
+<div class="container mb-5">
+    <div class="row">
+        <!-- Contact Form -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    @if (TempData["Message"] != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            @TempData["Message"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+
+                    <form asp-action="Contact" method="post" class="contact-form">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label">Namn</label>
+                            <input asp-for="Name" class="form-control" placeholder="Ditt namn">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label">E-post</label>
+                            <input asp-for="Email" class="form-control" placeholder="din.epost@exempel.se">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Subject" class="form-label">Ämne</label>
+                            <input asp-for="Subject" class="form-control" placeholder="Vad gäller det?">
+                            <span asp-validation-for="Subject" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Message" class="form-label">Meddelande</label>
+                            <textarea asp-for="Message" class="form-control" rows="5" placeholder="Skriv ditt meddelande här..."></textarea>
+                            <span asp-validation-for="Message" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Skicka Meddelande</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title">Kontaktinformation</h3>
+                    <p class="card-text">Du kan nå mig via följande kanaler:</p>
+                    
+                    <ul class="list-unstyled">
+                        <li class="mb-3">
+                            <i class="bi bi-geo-alt text-primary me-2"></i>
+                            [Din Plats]
+                        </li>
+                        <li class="mb-3">
+                            <i class="bi bi-envelope text-primary me-2"></i>
+                            <a href="mailto:din.epost@exempel.se">din.epost@exempel.se</a>
+                        </li>
+                        <li class="mb-3">
+                            <i class="bi bi-telephone text-primary me-2"></i>
+                            <a href="tel:+46701234567">+46 70 123 45 67</a>
+                        </li>
+                    </ul>
+
+                    <h4 class="mt-4">Följ Mig</h4>
+                    <div class="social-links mt-3">
+                        <a href="#" class="me-3" title="LinkedIn">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                        <a href="#" class="me-3" title="GitHub">
+                            <i class="bi bi-github"></i>
+                        </a>
+                        <a href="#" class="me-3" title="Twitter">
+                            <i class="bi bi-twitter-x"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Google Maps -->
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Plats</h3>
+                    <div class="ratio ratio-16x9">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d YOUR_COORDINATES"
+                            width="600" 
+                            height="450" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Auto-dismiss alert after 5 seconds
+        window.setTimeout(function() {
+            $(".alert").fadeTo(500, 0).slideUp(500, function() {
+                $(this).remove();
+            });
+        }, 5000);
+    </script>
+}

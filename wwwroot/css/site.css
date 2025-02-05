@@ -1,0 +1,364 @@
+:root {
+    --primary-color: #09b6a2; /* Changed to Codeium primary color */
+    --secondary-color: #dcdcdc; /* Changed to a lighter gray */
+    --accent-color: #71e9d8; /* Changed to Codeium accent color */
+    --codeium-chat-background: #212121;
+    --codeium-editor-background: #1d1f21;
+    --codeium-editor-color: #dcdcdc; /* Changed from white to light gray */
+    --codeium-text-color: #dcdcdc; /* Changed from white to a lighter gray */
+    --codeium-link-color: #dcdcdc;
+    --codeium-link-hover-color: #b0b0b0;
+    --codeium-caption-color: #dcdcdc;
+    --codeium-message-block-user-background: #4876a8;
+    --codeium-message-block-user-color: #dcdcdc; /* Changed from white to light gray */
+    --codeium-message-block-bot-background: #646464;
+    --codeium-message-block-bot-color: #dcdcdc; /* Changed from white to light gray */
+    --codeium-input-color: #000;
+    --codeium-input-background: #f0f0f0;
+    --codeium-tooltip-background: #646464;
+    --codeium-tooltip-color: #dcdcdc; /* Changed from white to light gray */
+    --codeium-active-selection-background: #4876a8;
+    --codeium-active-selection-color: #dcdcdc; /* Changed from white to light gray */
+    --codeium-button-hover-background: #b0b0b0;
+    --codeium-button-background: #dcdcdc;
+    --codeium-button-color: #333;
+    --codeium-button-secondary-hover-background: #b0b0b0;
+    --codeium-button-secondary-background: #dcdcdc;
+    --codeium-button-secondary-color: #333;
+    --codeium-editor-line-number-color: #0bb39f;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+    font-size: 16px;
+}
+
+body {
+    margin-bottom: 60px;
+    font-family: Arial, sans-serif; /* Updated font-family */
+    background-color: var(--codeium-editor-background);
+    color: var(--codeium-text-color);
+}
+
+/* Navbar styles */
+.navbar {
+    padding: 1rem 0;
+    transition: all 0.3s ease;
+    background-color: var(--primary-color);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+/* Hero section */
+.hero {
+    padding: 6rem 0;
+    background-color: #09b6a2; /* Primär färg */
+    color: var(--codeium-text-color);
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+/* Project cards */
+.project-card {
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+.project-card .card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Utvalda Projekt */
+.featured-projects {
+    background-color: #09b6a2; /* Primär färg */
+    color: var(--codeium-text-color);
+}
+
+/* Skills section */
+.skills-section {
+    background-color: #09b6a2; /* Primär färg */
+    color: var(--codeium-text-color);
+}
+
+.skill-item {
+    margin-bottom: 1.5rem;
+}
+
+.skill-name {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.progress {
+    height: 10px;
+    border-radius: 5px;
+}
+
+/* Testimonials */
+.testimonial {
+    text-align: center;
+    padding: 2rem;
+}
+
+.testimonial-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+/* Blog posts */
+.blog-post {
+    margin-bottom: 2rem;
+}
+
+.blog-post-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.blog-post-meta {
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+/* Contact form */
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Footer */
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem 0;
+    background-color: var(--primary-color); /* Samma som navbar */
+}
+
+.social-links a {
+    font-size: 1.5rem;
+    color: #dcdcdc; /* Ljusgrå färg */
+}
+
+.social-links a:hover {
+    color: #dcdcdc; /* Ljusgrå färg */
+}
+
+/* Dark mode adjustments */
+[data-bs-theme="dark"] {
+    --primary-color: #09b6a2;
+    --secondary-color: #dcdcdc;
+    --accent-color: #71e9d8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+}
+
+/* Animations */
+.fade-in {
+    animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.btn {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.375rem;
+    transition: all 0.1s ease-in-out;
+    outline: none;
+    background-color: #dcdcdc; /* Ljusgrå bakgrund */
+    color: #333; /* Mörkare textfärg */
+    padding: 0.5rem 1rem;
+    margin-top: 2rem;
+}
+
+.btn:hover {
+    background-color: #b0b0b0; /* Mörkare ljusgrå vid hover */
+}
+
+.btn:disabled {
+    border-color: #d1d5db;
+    background-color: #e5e7eb;
+}
+
+.btn:focus {
+    box-shadow: 0 0 0 4px rgba(108, 117, 125, 0.5); /* Focus ring */
+}
+
+.btn-login {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.btn-login:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--secondary-color);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--secondary-color);
+}
+
+.btn-outline-light {
+    background-color: transparent;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline-light:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.card {
+    background-color: #212121;
+    border: 1px solid #cccccc;
+}
+
+.card-title, .card-text {
+    color: #333333;
+}
+
+a {
+    color: #dcdcdc; /* Ljusgrå färg */
+}
+
+a:hover {
+    color: #b0b0b0; /* Mörkare ljusgrå vid hover */
+    text-decoration: none;
+}
+
+.img-fluid {
+    transition: transform 0.3s ease;
+}
+
+.img-fluid:hover {
+    transform: scale(1.05);
+}
+
+.auth-card {
+    background: #212121;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.auth-card:hover {
+    transform: translateY(-5px);
+}
+
+.auth-input {
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 12px;
+    transition: all 0.3s ease;
+}
+
+.auth-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.25);
+}
+
+.auth-button {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.auth-button:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+.otp-display {
+    background-color: #212121;
+    border-left: 4px solid var(--primary-color);
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.otp-input {
+    letter-spacing: 8px;
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.form-floating {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.form-floating input {
+    height: calc(3.5rem + 2px);
+    padding: 1rem 0.75rem;
+}
+
+.form-floating label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 1rem 0.75rem;
+    pointer-events: none;
+    transform-origin: 0 0;
+    transition: opacity .1s ease-in-out,transform .1s ease-in-out;
+}

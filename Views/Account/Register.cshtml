@@ -1,0 +1,45 @@
+@model Portfolio.Models.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Skapa konto";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="auth-card">
+                <div class="card-body p-4">
+                    <h2 class="text-center mb-4">@ViewData["Title"]</h2>
+                    
+                    <form asp-controller="Account" asp-action="Register" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        
+                        <div class="form-floating mb-3">
+                            <input asp-for="Name" class="form-control auth-input" placeholder="Ditt namn" />
+                            <label asp-for="Name">Namn</label>
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input asp-for="Email" class="form-control auth-input" placeholder="namn@exempel.com" />
+                            <label asp-for="Email">E-postadress</label>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn auth-button">Skapa konto</button>
+                        </div>
+                        
+                        <div class="text-center mt-3">
+                            <p class="mb-0">Har du redan ett konto? <a asp-action="Login" class="text-decoration-none">Logga in här</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

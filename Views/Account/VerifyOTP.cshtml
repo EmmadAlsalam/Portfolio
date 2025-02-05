@@ -1,0 +1,73 @@
+@{
+    ViewData["Title"] = "Verifiera din identitet";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="auth-card">
+                <div class="card-body p-4">
+                    <h2 class="text-center mb-4">@ViewData["Title"]</h2>
+                    
+                    @if (TempData["DisplayOTP"] != null)
+                    {
+                        <div class="otp-display text-center">
+                            <p class="mb-2">Din engångskod har skickats</p>
+                            <h3 class="mb-0">@TempData["DisplayOTP"]</h3>
+                            <small class="text-muted">I en riktig applikation skulle denna kod skickas via e-post</small>
+                        </div>
+                    }
+
+                    <form asp-controller="Account" asp-action="VerifyOTP" method="post">
+                        <div class="form-floating mb-4">
+                            <input type="text" name="otp" class="form-control auth-input otp-input" 
+                                   maxlength="6" required placeholder="000000"
+                                   pattern="[0-9]{6}" />
+                            <label>Ange 6-siffrig kod</label>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn auth-button">Verifiera</button>
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <p class="mb-0">Fick du ingen kod? <a href="#" class="text-decoration-none" id="resendOTP">Skicka igen</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Auto-focus på OTP input
+            $('input[name="otp"]').focus();
+
+            // Formatera OTP input
+            $('input[name="otp"]').on('input', function() {
+                this.value = this.value.replace(/[^0-9]/g, '');
+            });
+
+            // Timer för att skicka om OTP
+            let timeLeft = 30;
+            const resendLink = $('#resendOTP');
+            
+            function updateResendTimer() {
+                if(timeLeft > 0) {
+                    resendLink.text(`Skicka igen (${timeLeft}s)`);
+                    resendLink.addClass('disabled');
+                    timeLeft--;
+                    setTimeout(updateResendTimer, 1000);
+                } else {
+                    resendLink.text('Skicka igen');
+                    resendLink.removeClass('disabled');
+                }
+            }
+            
+            updateResendTimer();
+        });
+    </script>
+}

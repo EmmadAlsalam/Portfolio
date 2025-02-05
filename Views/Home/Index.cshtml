@@ -1,0 +1,120 @@
+@model HomeViewModel
+
+@{
+    ViewData["Title"] = "Hem";
+}
+
+<!-- Hero Section -->
+<section class="hero mb-5">
+    <div class="container">
+        <h1 class="display-4 fw-bold fade-in">ASP.NET-utvecklare</h1>
+        <p class="lead fade-in">Skapar moderna webbapplikationer med de senaste teknologierna</p>
+        <div class="d-flex justify-content-center gap-3 fade-in">
+            <a asp-controller="Projects" asp-action="Index" class="btn btn-light btn-lg">Se Mina Projekt</a>
+            <a asp-controller="Home" asp-action="Contact" class="btn btn-light btn-lg">Kontakta Mig</a>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Projects -->
+<section class="mb-5 hero">
+    <div class="container">
+        <h2 class="display-5 fw-bold fade-in">Ladda Ner Mitt CV</h2>
+        <div class="row justify-content-center">
+        <p class="mb-2">Klicka på knappen nedan för att ladda ner mitt CV i PDF-format.</p>
+            <div class="d-flex justify-content-center gap-3 fade-in">
+                <a href="documents/EMMADALSALAM.pdf" class="btn btn-light btn-lg" download>
+                    Ladda Ner CV
+                </a>
+                <a href="documents/personligtbrev.pdf" class="btn btn-light btn-lg" download>
+                    personligtbrev
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section class="mb-5 hero">
+    <div class="container">
+        <h1 class="display-5 fw-bold fade-in">Kompetenser & Expertis</h1>
+        <div class="row">
+            @foreach (var skill in Model.TopSkills)
+            {
+                <div class="col-md-6">
+                    <div class="skill-item">
+                        <div class="d-flex justify-content-between">
+                            <span class="skill-name">@skill.Name</span>
+                            <span>@skill.Proficiency%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: @(skill.Proficiency)%" 
+                                 aria-valuenow="@skill.Proficiency" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+@if (Model.Testimonials.Any())
+{
+    <section class="mb-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Vad Kunder Säger</h2>
+            <div class="row">
+                @foreach (var testimonial in Model.Testimonials)
+                {
+                    <div class="col-md-4">
+                        <div class="testimonial">
+                            @if (!string.IsNullOrEmpty(testimonial.ImageUrl))
+                            {
+                                <img src="@testimonial.ImageUrl" alt="@testimonial.ClientName" class="testimonial-image">
+                            }
+                            <p class="testimonial-content">@testimonial.Content</p>
+                            <p class="testimonial-author">
+                                <strong>@testimonial.ClientName</strong><br>
+                                <small>@testimonial.Company</small>
+                            </p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+<!-- Recent Blog Posts -->
+@if (Model.RecentBlogPosts.Any())
+{
+    <section class="mb-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Senaste Blogginläggen</h2>
+            <div class="row">
+                @foreach (var post in Model.RecentBlogPosts)
+                {
+                    <div class="col-md-4">
+                        <div class="blog-post">
+                            @if (!string.IsNullOrEmpty(post.FeaturedImageUrl))
+                            {
+                                <img src="@post.FeaturedImageUrl" alt="@post.Title" class="img-fluid mb-3">
+                            }
+                            <h3 class="blog-post-title">@post.Title</h3>
+                            <div class="blog-post-meta">
+                                <span><i class="bi bi-calendar"></i> @post.PublishedDate.ToString("d MMMM yyyy")</span>
+                                @if (!string.IsNullOrEmpty(post.Category))
+                                {
+                                    <span class="ms-3"><i class="bi bi-folder"></i> @post.Category</span>
+                                }
+                            </div>
+                            <p>@post.Excerpt</p>
+                            <a asp-controller="Blog" asp-action="Post" asp-route-slug="@post.Slug" class="btn btn-outline-primary">Läs Mer</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
