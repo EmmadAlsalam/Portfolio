@@ -1,11 +1,19 @@
 services:
   - type: web
     name: portfolio-app
-    env: dotnet
+    env: docker
     buildCommand: |
+      # Installera .NET SDK
+      wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
+      chmod +x ./dotnet-install.sh
+      ./dotnet-install.sh --channel 8.0
+      export PATH="$HOME/.dotnet:$PATH"
+      
+      # Restore och publish projekt
       dotnet restore
       dotnet publish -c Release -o ./publish
     startCommand: |
+      export PATH="$HOME/.dotnet:$PATH"
       cd publish
       dotnet Portfolio.dll
     envVars:
@@ -13,7 +21,9 @@ services:
         value: Production
       - key: DOTNET_CLI_HOME
         value: /tmp/dotnet_home
+      - key: DOTNET_ROOT
+        value: $HOME/.dotnet
     plan: free
     branch: main
     rootDir: .
-    runtime: dotnet8.0
+    runtime: docker
