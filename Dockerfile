@@ -2,11 +2,11 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /source
 
-# Kopiera csproj och återställ beroenden
+# Kopiera projektfiler och återställ beroenden
 COPY *.csproj .
 RUN dotnet restore
 
-# Kopiera återstående filer
+# Kopiera återstående filer och bygg
 COPY . .
 RUN dotnet publish -c release -o /app
 
@@ -14,4 +14,12 @@ RUN dotnet publish -c release -o /app
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build /app .
+
+# Ange miljövariabler
+ENV ASPNETCORE_ENVIRONMENT=Production
+ENV ASPNETCORE_URLS=http://0.0.0.0:8080
+
+# Exponera port
+EXPOSE 8080
+
 ENTRYPOINT ["dotnet", "Portfolio.dll"]
